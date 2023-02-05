@@ -177,6 +177,10 @@ class Application(tk.Tk):
                 self.goniowrap = self.deg2rad
                 self.a_goniowrap = self.rad2deg
                 self.gonioBtn.config(text="DEG")
+            if token == "c" or token == "cp":
+                self.copy()
+            if token == "d" or token == "del":
+                self.delete()
             if token == "Q":
                 self.quit()
             self.listbox.see("end")
