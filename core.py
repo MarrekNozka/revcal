@@ -155,6 +155,9 @@ class Application(tk.Tk):
                     a = self.listbox.get("end")
                     self.listbox.delete("end")
                     self.listbox.insert("end", self.opr2[token](a, b))
+                    self.listbox.select_anchor("end")
+                    self.listbox.activate("end")
+                    self.listbox.see("end")
                     self.status(f"> {self.size}")
                 else:
                     self.status("Error: Too few items in stack!")
@@ -163,11 +166,17 @@ class Application(tk.Tk):
                     a = self.listbox.get("end")
                     self.listbox.delete("end")
                     self.listbox.insert("end", self.opr1[token](a))
+                    self.listbox.select_anchor("end")
+                    self.listbox.activate("end")
+                    self.listbox.see("end")
                     self.status(f"> {self.size}")
                 else:
                     self.status("Error: Too few items in stack!")
             elif token in self.const:
                 self.listbox.insert("end", self.const[token])
+                self.listbox.select_anchor("end")
+                self.listbox.activate("end")
+                self.listbox.see("end")
                 self.status(f"> {self.size}")
             elif token == "rad":
                 self.goniowrap = self.rad2rad
@@ -181,6 +190,20 @@ class Application(tk.Tk):
                 self.copy()
             elif token == "d" or token == "del":
                 self.delete()
+            elif token == "s" or token == "swap":
+                if self.size >= 2:
+                    b = self.listbox.get("end")
+                    self.listbox.delete("end")
+                    a = self.listbox.get("end")
+                    self.listbox.delete("end")
+                    self.listbox.insert("end", b)
+                    self.listbox.insert("end", a)
+                    self.listbox.select_anchor("end")
+                    self.listbox.activate("end")
+                    self.listbox.see("end")
+                    self.status(f"> {self.size}")
+                else:
+                    self.status("Error: Too few items in stack!")
             elif token == "Q":
                 self.quit()
             else:
@@ -285,9 +308,10 @@ class Application(tk.Tk):
             print("E", end="")
         if i >= self.offset:
             self.listbox.delete(i)
-            self.listbox.select_set(i - 1)
-            self.listbox.select_anchor(i - 1)
-            self.listbox.activate(i - 1)
+            f = i - 1 if i > self.offset else i
+            self.listbox.select_set(f)
+            self.listbox.select_anchor(f)
+            self.listbox.activate(f)
             self.listbox.see("end")
             self.status(f"> {self.size}")
 

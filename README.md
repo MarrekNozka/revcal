@@ -28,6 +28,7 @@ Commands
 * `rad`, `deg`: switch between radians and degrees. 
 * `c`, `cp`: copy item in stack
 * `d`, `del`: remove item from stack
+* `s`, `swap`: swap last two items in stack
 * `Q`: quit
 
 
