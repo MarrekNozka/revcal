@@ -61,7 +61,7 @@ class Application(tk.Tk):
         self.statusFrame = tk.Frame(self)
         self.listFrame.pack(fill="both", expand=1)
         self.entry.pack(anchor="w", fill="both")
-        self.statusFrame.pack(fill="both", expand=1)
+        self.statusFrame.pack(fill="both")
 
         self.listbox = tk.Listbox(self.listFrame, width=33, takefocus=True)
         self.btnFrame = tk.Frame(self.listFrame)
@@ -121,7 +121,7 @@ class Application(tk.Tk):
         self.entry.bind("<Return>", self.process)
         self.entry.bind("<KP_Enter>", self.process)
 
-        self.offset = 12  # to add items to stack from bottom
+        self.offset = 64  # to add items to stack from bottom
         for _ in range(self.offset):
             self.listbox.insert("end", "")
 
@@ -158,7 +158,7 @@ class Application(tk.Tk):
                     self.status(f"> {self.size}")
                 else:
                     self.status("Error: Too few items in stack!")
-            if token in self.opr1:
+            elif token in self.opr1:
                 if self.size >= 1:
                     a = self.listbox.get("end")
                     self.listbox.delete("end")
@@ -166,23 +166,25 @@ class Application(tk.Tk):
                     self.status(f"> {self.size}")
                 else:
                     self.status("Error: Too few items in stack!")
-            if token in self.const:
+            elif token in self.const:
                 self.listbox.insert("end", self.const[token])
                 self.status(f"> {self.size}")
-            if token == "rad":
+            elif token == "rad":
                 self.goniowrap = self.rad2rad
                 self.a_goniowrap = self.rad2rad
                 self.gonioBtn.config(text="RAD")
-            if token == "deg":
+            elif token == "deg":
                 self.goniowrap = self.deg2rad
                 self.a_goniowrap = self.rad2deg
                 self.gonioBtn.config(text="DEG")
-            if token == "c" or token == "cp":
+            elif token == "c" or token == "cp":
                 self.copy()
-            if token == "d" or token == "del":
+            elif token == "d" or token == "del":
                 self.delete()
-            if token == "Q":
+            elif token == "Q":
                 self.quit()
+            else:
+                self.status(f"Error: Unknow token {token}.")
             self.listbox.see("end")
 
     def click_handler(self, e: tk.Event):

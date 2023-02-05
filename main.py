@@ -15,6 +15,7 @@ opr2 = {
 }
 
 opr1 = {
+    "--": lambda x: -x,
     "1/": lambda x: 1 / x,
     "V": math.sqrt,
     "!": math.factorial,
@@ -24,6 +25,8 @@ const = {
     "pi": math.pi,
     "pi2": math.pi / 2,
     "e": math.e,
+    "e0": 8.854e-12,  # Vacuum permittivity
+    "m0": 4 * math.pi * 1e-7,  # Vacuum permeability
 }
 
 app = Application()
