@@ -32,7 +32,7 @@ Math and constansts
 -----------------------
 
 All is vary easy to configure in
-[`main.py`](MarrekNozka/revcal/blob/main/main.py). Just add the key to dictionary
+[`main.py`](main.py). Just add the key to dictionary
 `opr2` or `opr1`. Dictionary `opr2` contains function witch two parametrs and `opr1`
 contains function with one parameter.
 
